@@ -1,30 +1,6 @@
 package model.mail;
 
 public class Mail {
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public void setTo(String[] to) {
-        this.to = to;
-    }
-
-    public void setCc(String[] cc) {
-        this.cc = cc;
-    }
-
-    public void setBcc(String[] bcc) {
-        this.bcc = bcc;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     private String from = null;
     private String[] to = null;
     private String[] cc = null;
@@ -54,5 +30,29 @@ public class Mail {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public void setTo(String[] to) {
+        this.to = to;
+    }
+
+    public void setCc(String[] cc) {
+        this.cc = cc;
+    }
+
+    public void setBcc(String[] bcc) {
+        this.bcc = bcc;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
