@@ -13,7 +13,7 @@ public class Group {
         persons.add(p);
     }
 
-    public LinkedList<Person> getGroup() {
+    public LinkedList<Person> getListPerson() {
         return persons;
     }
 }
