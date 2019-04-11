@@ -13,27 +13,34 @@ import model.mail.Person;
 
 public class ReadConfig {
 
-	private LinkedList<Person> victims;
+	private LinkedList<Person> victims = new LinkedList<Person>();
+	private LinkedList<Person> cc;
+	private String serverIP;
+	private int serverPort;
+	private List<String> messages;
+	private int nbGroup;
 
 	public ReadConfig(String file) throws IOException {
 		
-		BufferedReader lecture = null;
-		boolean fini = false;
+		BufferedReader reader = null;
 		
 		try {
-			
-			lecture = new BufferedReader(new FileReader("src/listPerson.txt"));
+			reader = new BufferedReader(new FileReader("./config/listPerson.txt"));
+			String victim = null;
+			do {
+				victim = reader.readLine();
+				String[] person = victim.split(" ");
 
-			while(fini != true) {
-				String ligne = lecture.readLine();
-				if(ligne != null)
-					System.out.println(ligne);
-				else
-					fini = true;
-			}
+				if(person.length == 3) {
+					victims.add(new Person(person[1], person[0], person[2]));
+				}
+
+			} while(victim != null);
+
+
 			
 		}
-		catch(FileNotFoundException fnfe) {
+		catch(FileNotFoundException e) {
 			System.out.println("Fichier introuvable");
 		}
 	}
