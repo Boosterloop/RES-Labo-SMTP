@@ -6,7 +6,7 @@ public class Group {
     private LinkedList<Person> persons;
 
     Group(LinkedList<Person> persons) {
-        this.persons = new LinkedList<>();
+        this.persons = new LinkedList<Person>();
         this.persons = persons;
     }
 
