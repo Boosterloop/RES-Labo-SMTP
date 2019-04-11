@@ -1,8 +1,6 @@
 package config;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +12,6 @@ import model.mail.Person;
 public class ReadConfig {
 
 	private LinkedList<Person> victims = new LinkedList<Person>();
-	private LinkedList<Person> cc;
 	private String serverIP;
 	private int serverPort;
 	private LinkedList<String> messages;
@@ -25,22 +22,31 @@ public class ReadConfig {
 		BufferedReader reader = null;
 		
 		try {
-			reader = new BufferedReader(new FileReader("./config/listPerson.txt"));
+			reader = new BufferedReader(new FileReader("./config/victim"));
 			String victim = null;
 			do {
 				victim = reader.readLine();
-				String[] person = victim.split(" ");
+				/*String[] person = victim.split(" ");
 
 				if(person.length == 3) {
 					victims.add(new Person(person[1], person[0], person[2]));
-				}
+				} */
+				victims.add(new Person(null, null, victim));
 
 			} while(victim != null);
-
+			reader.close();
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Fichier introuvable");
 		}
+
+		// config.properties
+		Properties properties = new Properties();
+		properties.load(new FileInputStream("./config/config.properties"));
+
+		nbGroup = Integer.parseInt(properties.getProperty("numberOfGroups"));
+		serverIP = properties.getProperty("smtpServerAddress");
+		serverPort = Integer.parseInt(properties.getProperty("smptServerPort"));
 	}
 	
 	/**
