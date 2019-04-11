@@ -17,7 +17,7 @@ public class ReadConfig {
 	private LinkedList<Person> cc;
 	private String serverIP;
 	private int serverPort;
-	private List<String> messages;
+	private LinkedList<String> messages;
 	private int nbGroup;
 
 	public ReadConfig(String file) throws IOException {
@@ -37,8 +37,6 @@ public class ReadConfig {
 
 			} while(victim != null);
 
-
-			
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("Fichier introuvable");
@@ -50,5 +48,17 @@ public class ReadConfig {
 	 */
 	public LinkedList<Person> getVictims() {
 		return victims;
-	}	
+	}
+
+	public int getNbGroups() {
+		return nbGroup;
+	}
+
+	public int getNbVictims() {
+		return victims.size();
+	}
+
+	public LinkedList<String> getMessages() {
+		return messages;
+	}
 }

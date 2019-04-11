@@ -8,7 +8,6 @@ public class Prank {
 	
 	private Person victimSender;
 	private LinkedList<Person> victimsRecever;
-	private LinkedList<Person> victimsCC;
 	private String subject;
 	private String Message;
 	
@@ -32,17 +31,6 @@ public class Prank {
 
 	public void addVictimRecever(Person victim) {
 		this.victimsRecever.add(victim);
-	}
-
-	/**
-	 * @return the victimsCC
-	 */
-	public LinkedList<Person> getVictimsCC() {
-		return victimsCC;
-	}
-
-	public void addVictimCC(Person victimCC) {
-		this.victimsCC.add(victimCC);
 	}
 
 	/**

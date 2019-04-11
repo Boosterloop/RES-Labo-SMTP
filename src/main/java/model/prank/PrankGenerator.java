@@ -21,7 +21,7 @@ public class PrankGenerator {
         final int SIZE_GROUP = 3;
         LinkedList<Prank> pranks = new LinkedList<Prank>();
 
-        LinkedList<String> messages = rC.getMessage();
+        LinkedList<String> messages = rC.getMessages();
 
         int indexMessage = 0;
         int nbGroups = rC.getNbGroups();
@@ -45,7 +45,6 @@ public class PrankGenerator {
             prank.setVictimSender(sender);
             for(Person p : victims)
                 prank.addVictimRecever(p);
-            prank.addVictimCC(rC.getWitnessToCC());
             prank.setMessage(messages.get(indexMessage));
             indexMessage = ++indexMessage % messages.size();
 
@@ -55,7 +54,7 @@ public class PrankGenerator {
         return pranks;
     }
 
-    public LinkedList<Group> CreatorGroup(LinkedList<Person> victims, int nbGroup){
+    private LinkedList<Group> CreatorGroup(LinkedList<Person> victims, int nbGroup){
         LinkedList<Group> groups = new LinkedList<Group>();
 
         for(int i = 0; i < nbGroup; ++i)
