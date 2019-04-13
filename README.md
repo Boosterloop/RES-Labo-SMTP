@@ -44,5 +44,12 @@ docker build --tag mockmock .
 ```
 
 ## Configuration de l'application
+Notre application se configure à l'aide de 3 fichiers de configuration différents. 
+- Un fichier config.properties contenant l'adresse du serveur SMTP, le port à utiliser et le nombre de groupe
+- Un fichier message contenant les emails à envoyer, les messages doivent tous commencer par "Subject:" et se terminer par #END
+- Un fichier victim contenant les adresses emails des victimes
+
+### Exemples des fichiers de configurations
+Vous trouverez des exemples pour les fichiers de configuration dans le dossier config.
 ## Utilisation de l'application
 ## Implémentation
