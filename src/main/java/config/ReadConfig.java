@@ -65,10 +65,10 @@ public class ReadConfig {
                 }
                 else {
                     if(line.startsWith("Subject:")) {
-                        message = line;
+                        message = line + "\n";
                     }
                     else {
-                        message += line;
+                        message += line + "\n";
                     }
                 }
             }
