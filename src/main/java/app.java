@@ -7,7 +7,12 @@ import smtp.SmtpClient;
 public class app {
 
 	public static void main(String[] args) throws IOException {
-		//new ReadConfig("..\\listPerson.txt");
+		ReadConfig conf = new ReadConfig("..\\listPerson.txt");
+		System.out.println(conf.getMessages());
+		System.out.println(conf.getNbGroups());
+		System.out.println(conf.getNbVictims());
+		System.out.println(conf.getServerIP());
+
 
 		SmtpClient client = new SmtpClient("192.168.99.100", 2525);
 		Mail m = new Mail();

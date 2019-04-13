@@ -14,18 +14,19 @@ public class ReadConfig {
 	private LinkedList<Person> victims = new LinkedList<Person>();
 	private String serverIP;
 	private int serverPort;
-	private LinkedList<String> messages;
+	private LinkedList<String> messages = new LinkedList<String>();
 	private int nbGroup;
 
 	public ReadConfig(String file) throws IOException {
-		
-		BufferedReader reader = null;
-		
 		try {
+            BufferedReader reader;
 			reader = new BufferedReader(new FileReader("./config/victim"));
 			String victim = null;
-			do {
+			while(true) {
 				victim = reader.readLine();
+				if(victim == null) {
+				    break;
+                }
 				/*String[] person = victim.split(" ");
 
 				if(person.length == 3) {
@@ -33,7 +34,7 @@ public class ReadConfig {
 				} */
 				victims.add(new Person(null, null, victim));
 
-			} while(victim != null);
+			}
 			reader.close();
 		}
 		catch(FileNotFoundException e) {
@@ -47,6 +48,35 @@ public class ReadConfig {
 		nbGroup = Integer.parseInt(properties.getProperty("numberOfGroups"));
 		serverIP = properties.getProperty("smtpServerAddress");
 		serverPort = Integer.parseInt(properties.getProperty("smptServerPort"));
+
+        try {
+            BufferedReader reader = null;
+            reader = new BufferedReader(new FileReader("./config/message"));
+            String line = "";
+            String message = "";
+
+            while(true) {
+                line = reader.readLine();
+                if(line == null) {
+                    break;
+                }
+                if(line.equals("#END")) {
+                    messages.add(message);
+                }
+                else {
+                    if(line.startsWith("Subject:")) {
+                        message = line;
+                    }
+                    else {
+                        message += line;
+                    }
+                }
+            }
+            reader.close();
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("Fichier introuvable");
+        }
 	}
 	
 	/**
@@ -67,4 +97,12 @@ public class ReadConfig {
 	public LinkedList<String> getMessages() {
 		return messages;
 	}
+
+	public String getServerIP() {
+	    return serverIP;
+    }
+
+    public int getServerPort() {
+	    return serverPort;
+    }
 }
