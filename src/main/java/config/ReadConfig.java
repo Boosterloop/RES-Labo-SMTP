@@ -29,6 +29,10 @@ public class ReadConfig {
 	private String mailtrapUsername = null;
 	private String mailtrapPassword = null;
 
+	/**
+	 * Effectue la lecture des fichiers de configuration
+	 * @throws IOException en cas de problème de lecture
+	 */
 	public ReadConfig() throws IOException {
 		// Gestion des victimes
 		try {

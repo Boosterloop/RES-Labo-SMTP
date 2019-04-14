@@ -87,5 +87,6 @@ Nous avons choisi d'implémenter un client SMTP et un modèle de mail gérant le
 pas utilisé ces fonctionnalités pour ce labo. Il en est de même pour la classe `Person` permettant d'avoir un nom et un prénom, 
 qui ne sont pas utilisés dans le cadre de cette application.
 
-### Diagramme de classes de note application
+### Diagramme de classes de notre application
 ![Diagramme de classe](figures/diagrammeClasses.jpg)
+Généré par IntelliJ

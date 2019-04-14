@@ -107,7 +107,7 @@ public class Mail {
     }
 
     /**
-     * Defini le message du mail
+     * Definit le message du mail
      * @param message corps du mail
      */
     public void setMessage(String message) {
