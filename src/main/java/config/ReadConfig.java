@@ -1,3 +1,13 @@
+/*
+ * Auteurs : Alexandre Monteiro Marques, Alison Savary
+ *
+ * Cours : RES
+ * Laboratoire : SMTP
+ *
+ * Date : 1 Avril 2019
+ *
+ */
+
 package config;
 
 import java.io.BufferedReader;
