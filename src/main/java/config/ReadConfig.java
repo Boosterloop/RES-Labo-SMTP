@@ -19,7 +19,12 @@ public class ReadConfig {
 	private String mailtrapUsername = null;
 	private String mailtrapPassword = null;
 
+	/**
+	 * Effectue la lecture des fichiers de configuration
+	 * @throws IOException en cas de problème de lecture
+	 */
 	public ReadConfig() throws IOException {
+		// Gestion des victimes
 		try {
             BufferedReader reader;
 			reader = new BufferedReader(new FileReader("./config/victim"));
@@ -37,7 +42,7 @@ public class ReadConfig {
 			System.out.println("Fichier introuvable");
 		}
 
-		// config.properties
+		// Gestion de config.properties
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("./config/config.properties"));
 
@@ -49,6 +54,7 @@ public class ReadConfig {
 		mailtrapPassword = properties.getProperty("mailtrapPassword");
 		System.out.println(mailtrapPassword);
 
+		// Gestion des messages
         try {
             BufferedReader reader = null;
             reader = new BufferedReader(new FileReader("./config/message"));
@@ -80,56 +86,56 @@ public class ReadConfig {
 	}
 	
 	/**
-	 * @return the victims
+	 * @return Les victimes
 	 */
 	public LinkedList<Person> getVictims() {
 		return victims;
 	}
 
 	/**
-	 * @return le nombre de personne par groupes
+	 * @return Le nombre de groupe voulu
 	 */
 	public int getNbGroups() {
 		return nbGroup;
 	}
 
 	/**
-	 * @return le nombre de victims
+	 * @return Le nombre de victimes
 	 */
 	public int getNbVictims() {
 		return victims.size();
 	}
 
 	/**
-	 * @return la liste de message de prank
+	 * @return La liste des messages à utiliser
 	 */
 	public LinkedList<String> getMessages() {
 		return messages;
 	}
 
 	/**
-	 * @return l'adresse IP du serveur
+	 * @return L'adresse IP du serveur
 	 */
 	public String getServerIP() {
 	    return serverIP;
     }
 
 	/**
-	 * @return le port du serveur
+	 * @return Le port du serveur
 	 */
 	public int getServerPort() {
 	    return serverPort;
     }
 
 	/**
-	 * @return le nom d'utilisateur de mailTrap
+	 * @return Le nom d'utilisateur pour Mail Trap en base 64
 	 */
 	public String getMailtrapUsername() {
 		return mailtrapUsername;
 	}
 
 	/**
-	 * @return le mot de passe de mailTrap
+	 * @return Le mot de passe pour Mail Trap en base 64
 	 */
 	public String getMailtrapPassword() {
 		return mailtrapPassword;
