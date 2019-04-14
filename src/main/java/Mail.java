@@ -19,63 +19,57 @@ public class Mail {
     private String message = null;
 
     /**
-     * Retourne l'expéditeur du mail
-     * @return adresse mail de l'expéditeur
+     * @return expediteur du mail
      */
     public String getFrom() {
         return from;
     }
 
     /**
-     * Retourne les destinataires
-     * @return adresses mail des destinataires
+     * @return les destinataires
      */
     public String[] getTo() {
         return to;
     }
 
     /**
-     * Retourne les destinataires en copie
-     * @return adresses des destinataires en copie
+     * @return les destinataires en copie
      */
     public String[] getCc() {
         return cc;
     }
 
     /**
-     * Retourne les destinataires en copie cachée
-     * @return adresses des destinataires en copie cachée
+     * @return les destinataires en copie caché
      */
     public String[] getBcc() {
         return bcc;
     }
 
     /**
-     * Retourne le sujet du mail
-     * @return Sujet
+     * @return le sujet du mail
      */
     public String getSubject() {
         return subject;
     }
 
     /**
-     * Retourne le message du mail
-     * @return corps du message
+     * @return le message du mail
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * Definit l'expéditeur du mail
-     * @param from l'expéditeur du mail
+     * Defini l'expeditaire du mail
+     * @param from l'expeditaire du mail
      */
     public void setFrom(String from) {
         this.from = from;
     }
 
     /**
-     * Definit les destinaires du mail
+     * Defini les destinaire du mail
      * @param to les destinataires du mail
      */
     public void setTo(String[] to) {
@@ -83,7 +77,7 @@ public class Mail {
     }
 
     /**
-     * Definit les destinaires en copie du mail
+     * Defini les destinaires en copie du mail
      * @param cc des destinataires de copie du mail
      */
     public void setCc(String[] cc) {
@@ -91,15 +85,15 @@ public class Mail {
     }
 
     /**
-     * Definit les destinataire en copie cachée du mail
-     * @param bcc des destinataires de copie cachée du mail
+     * Defini les destinataire en copie caché du mail
+     * @param bcc des destinataires de copie caché du mail
      */
     public void setBcc(String[] bcc) {
         this.bcc = bcc;
     }
 
     /**
-     * Definit le sujet du mail
+     * Defini le sujet du mail
      * @param subject le sujet du mail
      */
     public void setSubject(String subject) {
@@ -108,7 +102,7 @@ public class Mail {
 
     /**
      * Defini le message du mail
-     * @param message corps du mail
+     * @param message message du mail
      */
     public void setMessage(String message) {
         this.message = message;

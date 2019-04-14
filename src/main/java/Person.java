@@ -19,7 +19,7 @@ public class Person {
 	/**
 	 * Unique constructeur
 	 * @param nom    : le nom de la personne
-	 * @param prenom : le prénom de la personne
+	 * @param prenom : le prenom de la personne
 	 * @param email  : l'email de la personne
 	 */
 	public Person(String nom, String prenom, String email) {
@@ -29,24 +29,21 @@ public class Person {
 	}
 
 	/**
-	 * Retourne le nom de la personne
-	 * @return nom
+	 * @return the nom
 	 */
 	public String getNom() {
 		return nom;
 	}
 
 	/**
-	 * Retourne le prénom de la personne
-	 * @return prenom
+	 * @return the prenom
 	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 	/**
-	 * Retourne l'email de la personne
-	 * @return email
+	 * @return the email
 	 */
 	public String getEmail() {
 		return email;

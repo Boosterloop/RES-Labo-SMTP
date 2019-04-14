@@ -1,13 +1,3 @@
-/*
- * Auteurs : Alexandre Monteiro Marques, Alison Savary
- *
- * Cours : RES
- * Laboratoire : SMTP
- *
- * Date : 1 Avril 2019
- *
- */
-
 package config;
 
 import java.io.BufferedReader;
@@ -29,12 +19,8 @@ public class ReadConfig {
 	private String mailtrapUsername = null;
 	private String mailtrapPassword = null;
 
-	/**
-	 * Effectue la lecture des fichiers de configuration
-	 * @throws IOException en cas de problème de lecture
-	 */
 	public ReadConfig() throws IOException {
-		// Gestion des victimes
+		// lecture du fichier Victim
 		try {
             BufferedReader reader;
 			reader = new BufferedReader(new FileReader("./config/victim"));
@@ -52,7 +38,7 @@ public class ReadConfig {
 			System.out.println("Fichier introuvable");
 		}
 
-		// Gestion de config.properties
+		// lecture du fichier config.properties
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("./config/config.properties"));
 
@@ -64,7 +50,7 @@ public class ReadConfig {
 		mailtrapPassword = properties.getProperty("mailtrapPassword");
 		System.out.println(mailtrapPassword);
 
-		// Gestion des messages
+		// lecture du fichier message
         try {
             BufferedReader reader = null;
             reader = new BufferedReader(new FileReader("./config/message"));
@@ -96,56 +82,56 @@ public class ReadConfig {
 	}
 	
 	/**
-	 * @return Les victimes
+	 * @return the victims
 	 */
 	public LinkedList<Person> getVictims() {
 		return victims;
 	}
 
 	/**
-	 * @return Le nombre de groupe voulu
+	 * @return le nombre de personne par groupes
 	 */
 	public int getNbGroups() {
 		return nbGroup;
 	}
 
 	/**
-	 * @return Le nombre de victimes
+	 * @return le nombre de victims
 	 */
 	public int getNbVictims() {
 		return victims.size();
 	}
 
 	/**
-	 * @return La liste des messages à utiliser
+	 * @return la liste de message de prank
 	 */
 	public LinkedList<String> getMessages() {
 		return messages;
 	}
 
 	/**
-	 * @return L'adresse IP du serveur
+	 * @return l'adresse IP du serveur
 	 */
 	public String getServerIP() {
 	    return serverIP;
     }
 
 	/**
-	 * @return Le port du serveur
+	 * @return le port du serveur
 	 */
 	public int getServerPort() {
 	    return serverPort;
     }
 
 	/**
-	 * @return Le nom d'utilisateur pour Mail Trap en base 64
+	 * @return le nom d'utilisateur de mailTrap
 	 */
 	public String getMailtrapUsername() {
 		return mailtrapUsername;
 	}
 
 	/**
-	 * @return Le mot de passe pour Mail Trap en base 64
+	 * @return le mot de passe de mailTrap
 	 */
 	public String getMailtrapPassword() {
 		return mailtrapPassword;

@@ -17,8 +17,8 @@ import java.io.IOException;
 public interface ISmtpClient {
 
 	/**
-	 * Envoie un email
-	 * @param mail Mail à envoyer
+	 * L'envoi de la prank
+	 * @param mail Le mail a envoyé
 	 * @throws IOException
 	 */
 	void sendMail(Mail mail) throws IOException;
