@@ -25,8 +25,8 @@ public class PrankGenerator {
         int nbVictims = rC.getNbVictims();
 
         if((nbVictims / nbGroups) < SIZE_GROUP){
-            System.out.println("Il n'y a pas asseu de victimes pour faire " + nbGroups + " groupes. Un groupe doit contenir" +
-                    "au moins " + SIZE_GROUP + " victimes.");
+            System.out.println("Il n'y a pas assez de victimes pour faire " + nbGroups + " groupes. Un groupe doit contenir" +
+                    " au moins " + SIZE_GROUP + " victimes.");
             nbGroups = nbVictims / SIZE_GROUP;
         }
 

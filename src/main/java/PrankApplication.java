@@ -16,10 +16,18 @@ public class PrankApplication {
 		LinkedList<Prank> pranks = prankGenerator.createPranks();
 
 		SmtpClient client = new SmtpClient(conf.getServerIP(), conf.getServerPort());
+		client.setMailTrapAuth(conf.getMailtrapUsername(), conf.getMailtrapPassword());
 
 		for(Prank p : pranks) {
 			 Mail m = p.createMail();
 			 client.sendMail(m);
+			 if(conf.getServerIP().equals("smtp.mailtrap.io")) {
+			 	try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+			 		e.printStackTrace();
+				}
+			 }
 		}
 	}
 }

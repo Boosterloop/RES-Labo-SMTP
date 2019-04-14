@@ -16,6 +16,8 @@ public class ReadConfig {
 	private int serverPort;
 	private LinkedList<String> messages = new LinkedList<String>();
 	private int nbGroup;
+	private String mailtrapUsername = null;
+	private String mailtrapPassword = null;
 
 	public ReadConfig() throws IOException {
 		try {
@@ -42,6 +44,10 @@ public class ReadConfig {
 		nbGroup = Integer.parseInt(properties.getProperty("numberOfGroups"));
 		serverIP = properties.getProperty("smtpServerAddress");
 		serverPort = Integer.parseInt(properties.getProperty("smptServerPort"));
+		mailtrapUsername = properties.getProperty("mailtrapUsername");
+		System.out.println(mailtrapUsername);
+		mailtrapPassword = properties.getProperty("mailtrapPassword");
+		System.out.println(mailtrapPassword);
 
         try {
             BufferedReader reader = null;
@@ -99,4 +105,12 @@ public class ReadConfig {
     public int getServerPort() {
 	    return serverPort;
     }
+
+    public String getMailtrapUsername() {
+		return mailtrapUsername;
+	}
+
+	public String getMailtrapPassword() {
+		return mailtrapPassword;
+	}
 }

@@ -8,10 +8,17 @@ import java.net.Socket;
 public class SmtpClient {
     private int port;
     private String serverIp;
+    private String username = null;
+    private String pass = null;
 
     public SmtpClient(String ip, int port) {
         serverIp = ip;
         this.port = port;
+    }
+
+    public void setMailTrapAuth(String base64Username, String base64Password) {
+        username = base64Username;
+        pass = base64Password;
     }
 
     public void sendMail(Mail mail) throws IOException {
@@ -32,13 +39,28 @@ public class SmtpClient {
             System.out.println(response);
         }
 
-        writer.print("MAIL FROM: " + mail.getFrom() + "\r\n");
+        if(serverIp.equals("smtp.mailtrap.io")) {
+            writer.print("AUTH LOGIN\r\n");
+            writer.flush();
+            response = reader.readLine();
+            System.out.println(response);
+            writer.print(username + "\r\n");
+            writer.flush();
+            response = reader.readLine();
+            System.out.println(response);
+            writer.print(pass + "\r\n");
+            writer.flush();
+            response = reader.readLine();
+            System.out.println(response);
+        }
+
+        writer.print("MAIL FROM: <" + mail.getFrom() + ">\r\n");
         writer.flush();
         response = reader.readLine();
         System.out.println(response);
 
         for(String s : mail.getTo()) {
-            writer.print("RCPT TO: " + s + "\r\n");
+            writer.print("RCPT TO: <" + s + ">\r\n");
             writer.flush();
             response = reader.readLine();
             System.out.println(response);
@@ -46,7 +68,7 @@ public class SmtpClient {
 
         if(mail.getCc() != null) {
             for(String s : mail.getCc()) {
-                writer.print("RCPT TO: " + s + "\r\n");
+                writer.print("RCPT TO: <" + s + ">\r\n");
                 writer.flush();
                 response = reader.readLine();
                 System.out.println(response);
@@ -55,7 +77,7 @@ public class SmtpClient {
 
         if(mail.getBcc() != null) {
             for(String s : mail.getBcc()) {
-                writer.print("RCPT TO: " + s + "\r\n");
+                writer.print("RCPT TO: <" + s + ">\r\n");
                 writer.flush();
                 response = reader.readLine();
                 System.out.println(response);
