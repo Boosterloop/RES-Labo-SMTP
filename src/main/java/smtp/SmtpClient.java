@@ -42,13 +42,17 @@ public class SmtpClient implements ISmtpClient{
     }
 
     public void sendMail(Mail mail) throws IOException {
+        // création du lien entre l'applciation et le serveur
         Socket socket = new Socket(serverIp, port);
+        // permettra d'envoyer des messages au serveur
         PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"));
+        // permettra de lire les informations du serveur
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 
         String response = reader.readLine();
         System.out.println(response);
 
+        // envoie au serveur un message de connexion
         writer.print("EHLO localhost\r\n");
         writer.flush();
         response = reader.readLine();
@@ -60,6 +64,7 @@ public class SmtpClient implements ISmtpClient{
         }
 
         if(serverIp.equals("smtp.mailtrap.io")) {
+            // authentification au serveur MailTrap
             writer.print("AUTH LOGIN\r\n");
             writer.flush();
             response = reader.readLine();
@@ -74,11 +79,14 @@ public class SmtpClient implements ISmtpClient{
             System.out.println(response);
         }
 
+        // Création du mail
+        // Envoie au serveur l'expédiateur du mail
         writer.print("MAIL FROM: <" + mail.getFrom() + ">\r\n");
         writer.flush();
         response = reader.readLine();
         System.out.println(response);
 
+        // Envoie au serveur les differents destinataires du mail
         for(String s : mail.getTo()) {
             writer.print("RCPT TO: <" + s + ">\r\n");
             writer.flush();
@@ -86,6 +94,7 @@ public class SmtpClient implements ISmtpClient{
             System.out.println(response);
         }
 
+        // Envoie au serveur les differents destinataires en copie du mail
         if(mail.getCc() != null) {
             for(String s : mail.getCc()) {
                 writer.print("RCPT TO: <" + s + ">\r\n");
@@ -95,6 +104,7 @@ public class SmtpClient implements ISmtpClient{
             }
         }
 
+        // Envoie au serveur les differents destinataires copie caché du mail
         if(mail.getBcc() != null) {
             for(String s : mail.getBcc()) {
                 writer.print("RCPT TO: <" + s + ">\r\n");
@@ -104,6 +114,7 @@ public class SmtpClient implements ISmtpClient{
             }
         }
 
+        // Debut du texte du corps du mail
         writer.print("DATA \r\n");
         writer.flush();
         response = reader.readLine();
@@ -148,7 +159,7 @@ public class SmtpClient implements ISmtpClient{
         writer.print(mail.getMessage() + "\r\n");
         writer.flush();
 
-        // Fin
+        // Fin de l'ecriture du mail
         writer.print(".");
         writer.print("\r\n");
         writer.flush();
