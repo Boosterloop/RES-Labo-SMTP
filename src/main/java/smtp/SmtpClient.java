@@ -1,3 +1,13 @@
+/*
+ * Auteurs : Alexandre Monteiro Marques, Alison Savary
+ *
+ * Cours : RES
+ * Laboratoire : SMTP
+ *
+ * Date : 1 Avril 2019
+ *
+ */
+
 package smtp;
 
 import model.mail.Mail;
@@ -5,17 +15,27 @@ import model.mail.Mail;
 import java.io.*;
 import java.net.Socket;
 
-public class SmtpClient {
+public class SmtpClient implements ISmtpClient{
     private int port;
     private String serverIp;
     private String username = null;
     private String pass = null;
 
+    /**
+     * Constructeur : Defini les paramètres du serveur
+     * @param ip du serveur
+     * @param port du serveur
+     */
     public SmtpClient(String ip, int port) {
         serverIp = ip;
         this.port = port;
     }
 
+    /**
+     * Permet de definir les configuration du site web MailTrap
+     * @param base64Username : nom d'utilisateur
+     * @param base64Password : le mot de passe
+     */
     public void setMailTrapAuth(String base64Username, String base64Password) {
         username = base64Username;
         pass = base64Password;

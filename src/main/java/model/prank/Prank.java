@@ -1,7 +1,16 @@
+/*
+ * Auteurs : Alexandre Monteiro Marques, Alison Savary
+ *
+ * Cours : RES
+ * Laboratoire : SMTP
+ *
+ * Date : 1 Avril 2019
+ *
+ */
+
 package model.prank;
 
 import java.util.LinkedList;
-
 import model.mail.Mail;
 import model.mail.Person;
 import util.Utils;
@@ -13,46 +22,58 @@ public class Prank {
 	private String message;
 	
 	/**
-	 * @return the victimSender
+	 * @return le expeditaire victime
 	 */
 	public Person getVictimSender() {
 		return victimSender;
 	}
 
 	/**
-	 * @param victimSender the victimSender to set
+	 * @param victimSender Defini le destinataire
 	 */
 	public void setVictimSender(Person victimSender) {
 		this.victimSender = victimSender;
 	}
 
+	/**
+	 * @return la liste des destinataires
+	 */
 	public LinkedList<Person> getVictimsRecever() {
 		return new LinkedList<Person>(victimsRecever);
 	}
 
+	/**
+	 * @param victim ajoute un destinataire
+	 */
 	public void addVictimRecever(Person victim) {
 		this.victimsRecever.add(victim);
 	}
 
+	/**
+	 * @param victims ajoute une liste destinataire
+	 */
 	public void addVictimsRecever(LinkedList<Person> victims) {
 		this.victimsRecever.addAll(victims);
 	}
 
-
 	/**
-	 * @return the message
+	 * @return la prank
 	 */
 	public String getMessage() {
 		return message;
 	}
 
 	/**
-	 * @param message the message to set
+	 * @param message defini la prank
 	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
+	/**
+	 * Cree le mail de la prank
+	 * @return le mail
+	 */
 	public Mail createMail() {
 		Mail mail = new Mail();
 

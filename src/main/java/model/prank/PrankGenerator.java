@@ -1,3 +1,13 @@
+/*
+ * Auteurs : Alexandre Monteiro Marques, Alison Savary
+ *
+ * Cours : RES
+ * Laboratoire : SMTP
+ *
+ * Date : 1 Avril 2019
+ *
+ */
+
 package model.prank;
 
 import config.ReadConfig;
@@ -15,6 +25,9 @@ public class PrankGenerator {
         this.rC = rC;
     }
 
+    /**
+     * @return la liste de prank generer
+     */
     public LinkedList<Prank> createPranks(){
         final int SIZE_GROUP = 3;
         LinkedList<Prank> pranks = new LinkedList<Prank>();
@@ -24,12 +37,14 @@ public class PrankGenerator {
         int nbGroups = rC.getNbGroups();
         int nbVictims = rC.getNbVictims();
 
+        // verification s'il y a assez de victimes pour le nombre de groupes
         if((nbVictims / nbGroups) < SIZE_GROUP){
             System.out.println("Il n'y a pas assez de victimes pour faire " + nbGroups + " groupes. Un groupe doit contenir" +
                     " au moins " + SIZE_GROUP + " victimes.");
             nbGroups = nbVictims / SIZE_GROUP;
         }
 
+        // Création de la prank avec des groupes generer aléatoirement
         LinkedList<Group> groups = createGroups(rC.getVictims(), nbGroups);
         for(Group group : groups){
             Prank prank = new Prank();
@@ -54,12 +69,19 @@ public class PrankGenerator {
         return pranks;
     }
 
+    /**
+     * Créer les groupes aléatoirement
+     * @param victims
+     * @param nbGroup
+     * @return
+     */
     private LinkedList<Group> createGroups(LinkedList<Person> victims, int nbGroup){
         LinkedList<Group> groups = new LinkedList<Group>();
 
         for(int i = 0; i < nbGroup; ++i)
             groups.add(new Group());
 
+        // permet de parcourir chaque group en ajoutant une personne à chaque fois
         int loop = 0;
 
         for(Person p : victims){

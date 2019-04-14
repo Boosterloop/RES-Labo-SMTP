@@ -86,30 +86,51 @@ public class ReadConfig {
 		return victims;
 	}
 
+	/**
+	 * @return le nombre de personne par groupes
+	 */
 	public int getNbGroups() {
 		return nbGroup;
 	}
 
+	/**
+	 * @return le nombre de victims
+	 */
 	public int getNbVictims() {
 		return victims.size();
 	}
 
+	/**
+	 * @return la liste de message de prank
+	 */
 	public LinkedList<String> getMessages() {
 		return messages;
 	}
 
+	/**
+	 * @return l'adresse IP du serveur
+	 */
 	public String getServerIP() {
 	    return serverIP;
     }
 
-    public int getServerPort() {
+	/**
+	 * @return le port du serveur
+	 */
+	public int getServerPort() {
 	    return serverPort;
     }
 
-    public String getMailtrapUsername() {
+	/**
+	 * @return le nom d'utilisateur de mailTrap
+	 */
+	public String getMailtrapUsername() {
 		return mailtrapUsername;
 	}
 
+	/**
+	 * @return le mot de passe de mailTrap
+	 */
 	public String getMailtrapPassword() {
 		return mailtrapPassword;
 	}
