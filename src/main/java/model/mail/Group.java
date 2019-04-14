@@ -23,16 +23,18 @@ public class Group {
     }
 
     /**
-     * @param p Ajout la personne au groupe
+     * Ajoute une personne au groupe
+     * @param p Person à ajouter
      */
     public void AddPerson(Person p){
         persons.add(p);
     }
 
     /**
-     * @return la liste des personnes du groupe
+     * Retourne la liste des personnes du groupe
+     * @return Liste des Person du groupe
      */
     public LinkedList<Person> getListPerson() {
-        return persons;
+        return new LinkedList<Person>(persons);
     }
 }

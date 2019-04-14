@@ -21,14 +21,20 @@ public class PrankGenerator {
 
     private ReadConfig rC;
 
+    /**
+     * Constructeur prenant un lecteur de configuration
+     * @param rC ReadConfig, lecteur de configuration
+     */
     public PrankGenerator(ReadConfig rC){
         this.rC = rC;
     }
 
     /**
-     * @return la liste de prank generer
+     * Crée et retourne les Prank
+     * @return liste de Prank
      */
     public LinkedList<Prank> createPranks(){
+        // Taille minimale d'un groupe
         final int SIZE_GROUP = 3;
         LinkedList<Prank> pranks = new LinkedList<Prank>();
         LinkedList<String> messages = rC.getMessages();
@@ -37,29 +43,34 @@ public class PrankGenerator {
         int nbGroups = rC.getNbGroups();
         int nbVictims = rC.getNbVictims();
 
-        // verification s'il y a assez de victimes pour le nombre de groupes
+        // Vérifie s'il y a assez de victimes pour le nombre de groupes
         if((nbVictims / nbGroups) < SIZE_GROUP){
             System.out.println("Il n'y a pas assez de victimes pour faire " + nbGroups + " groupes. Un groupe doit contenir" +
                     " au moins " + SIZE_GROUP + " victimes.");
             nbGroups = nbVictims / SIZE_GROUP;
         }
 
-        // Création de la prank avec des groupes generer aléatoirement
+        // Création de la Prank avec des groupes générés aléatoirement
         LinkedList<Group> groups = createGroups(rC.getVictims(), nbGroups);
+
+        // Pour chaque groupe
         for(Group group : groups){
             Prank prank = new Prank();
 
             LinkedList<Person> victims = group.getListPerson();
 
-            // permet de modifier l'ordre des personnes aléatoires
+            // Permet de modifier l'ordre des personnes aléatoirement
             Collections.shuffle(victims);
 
+            // Expéditeur
             Person sender = victims.get(0);
             victims.remove(0);
             prank.setVictimSender(sender);
 
+            // Destinataires
             prank.addVictimsRecever(victims);
 
+            // Message
             prank.setMessage(messages.get(indexMessage));
             indexMessage = ++indexMessage % messages.size();
 
@@ -70,25 +81,26 @@ public class PrankGenerator {
     }
 
     /**
-     * Créer les groupes aléatoirement
-     * @param victims Une liste de personne victimes
-     * @param nbGroup Le nombre de group
-     * @return Une liste de groupes
+     * Crée les groupes aléatoirement
+     * @param victims Liste de Person victimes
+     * @param nbGroup Nombre de groupes à créer
+     * @return Liste de Group
      */
     private LinkedList<Group> createGroups(LinkedList<Person> victims, int nbGroup){
         LinkedList<Group> groups = new LinkedList<Group>();
 
+        // Création des groupes
         for(int i = 0; i < nbGroup; ++i)
             groups.add(new Group());
 
-        // permet de parcourir chaque group en ajoutant une personne à chaque fois
+        // Permet de parcourir chaque groupe en ajoutant une personne à chaque fois
         int loop = 0;
 
+        // Parcourt de la liste des victimes
         for(Person p : victims){
             groups.get(loop).AddPerson(p);
             loop = ++loop % groups.size();
         }
-
         return groups;
     }
 

@@ -22,63 +22,72 @@ public class Prank {
 	private String message;
 	
 	/**
-	 * @return le expeditaire victime
+	 * Retourne l'expéditeur victime
+	 * @return Expéditeur victime
 	 */
 	public Person getVictimSender() {
 		return victimSender;
 	}
 
 	/**
-	 * @param victimSender Defini le destinataire
+	 * Définit l'expéditeur
+	 * @param victimSender Person expéditeur
 	 */
 	public void setVictimSender(Person victimSender) {
 		this.victimSender = victimSender;
 	}
 
 	/**
-	 * @return la liste des destinataires
+	 * Retourne la liste des destinataires victimes
+	 * @return liste des destinataires
 	 */
 	public LinkedList<Person> getVictimsRecever() {
 		return new LinkedList<Person>(victimsRecever);
 	}
 
 	/**
-	 * @param victim Ajoute un destinataire
+	 * Ajoute un nouveau destinataire
+	 * @param victim Person destinataire
 	 */
 	public void addVictimRecever(Person victim) {
 		this.victimsRecever.add(victim);
 	}
 
 	/**
-	 * @param victims ajoute une liste destinataire
+	 * Ajoute une liste de destinataires
+	 * @param victims liste Person destinataires
 	 */
 	public void addVictimsRecever(LinkedList<Person> victims) {
 		this.victimsRecever.addAll(victims);
 	}
 
 	/**
-	 * @return le message de la prank
+	 * Retourne le message lié à cette Prank
+	 * @return message
 	 */
 	public String getMessage() {
 		return message;
 	}
 
 	/**
-	 * @param message defini le message de la prank
+	 * Définit le message de la Prank
+	 * @param message String
 	 */
 	public void setMessage(String message) {
 		this.message = message;
 	}
 
 	/**
-	 * Cree le mail de la prank
-	 * @return le mail
+	 * Crée le mail de la Prank
+	 * @return objet Mail
 	 */
 	public Mail createMail() {
 		Mail mail = new Mail();
 
+		// Expéditeur
 		mail.setFrom(victimSender.getEmail());
 
+		// Destinataires
 		String[] to = new String[victimsRecever.size()];
 		int i = 0;
 		for(Person victim : victimsRecever) {
@@ -87,14 +96,16 @@ public class Prank {
 		}
 		mail.setTo(to);
 
+		// Sépare le sujet du corps du message
 		String[] messageSubjectAndBody = Utils.getNextLine(message);
 
 		if(!messageSubjectAndBody[0].equals("") && messageSubjectAndBody[0].startsWith("Subject:")) {
 			int index = messageSubjectAndBody[0].indexOf(' ');
+			// Sujet
 			mail.setSubject(messageSubjectAndBody[0].substring(index));
+			// Corps
 			mail.setMessage(messageSubjectAndBody[1]);
 		}
-
 		return mail;
 	}
 }
