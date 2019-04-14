@@ -78,7 +78,7 @@ public class Mail {
 
     /**
      * Defini les destinaires en copie du mail
-     * @param cc des destinataires
+     * @param cc des destinataires de copie du mail
      */
     public void setCc(String[] cc) {
         this.cc = cc;
@@ -86,7 +86,7 @@ public class Mail {
 
     /**
      * Defini les destinataire en copie caché du mail
-     * @param bcc
+     * @param bcc des destinataires de copie caché du mail
      */
     public void setBcc(String[] bcc) {
         this.bcc = bcc;

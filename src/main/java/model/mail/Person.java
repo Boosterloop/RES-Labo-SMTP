@@ -18,9 +18,9 @@ public class Person {
 
 	/**
 	 * Unique constructeur
-	 * @param nom
-	 * @param prenom
-	 * @param email
+	 * @param nom    : le nom de la personne
+	 * @param prenom : le prenom de la personne
+	 * @param email  : l'email de la personne
 	 */
 	public Person(String nom, String prenom, String email) {
 		this.nom = nom;

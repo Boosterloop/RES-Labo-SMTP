@@ -43,7 +43,7 @@ public class Prank {
 	}
 
 	/**
-	 * @param victim ajoute un destinataire
+	 * @param victim Ajoute un destinataire
 	 */
 	public void addVictimRecever(Person victim) {
 		this.victimsRecever.add(victim);
@@ -57,14 +57,14 @@ public class Prank {
 	}
 
 	/**
-	 * @return la prank
+	 * @return le message de la prank
 	 */
 	public String getMessage() {
 		return message;
 	}
 
 	/**
-	 * @param message defini la prank
+	 * @param message defini le message de la prank
 	 */
 	public void setMessage(String message) {
 		this.message = message;

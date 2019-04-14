@@ -71,9 +71,9 @@ public class PrankGenerator {
 
     /**
      * Créer les groupes aléatoirement
-     * @param victims
-     * @param nbGroup
-     * @return
+     * @param victims Une liste de personne victimes
+     * @param nbGroup Le nombre de group
+     * @return Une liste de groupes
      */
     private LinkedList<Group> createGroups(LinkedList<Person> victims, int nbGroup){
         LinkedList<Group> groups = new LinkedList<Group>();
