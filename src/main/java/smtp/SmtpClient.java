@@ -8,8 +8,6 @@ import java.net.Socket;
 public class SmtpClient {
     private int port;
     private String serverIp;
-    private PrintWriter out;
-    private BufferedReader in;
 
     public SmtpClient(String ip, int port) {
         serverIp = ip;
@@ -18,93 +16,106 @@ public class SmtpClient {
 
     public void sendMail(Mail mail) throws IOException {
         Socket socket = new Socket(serverIp, port);
-        out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 
-        String response = in.readLine();
+        String response = reader.readLine();
         System.out.println(response);
 
-        out.println("EHLO localhost");
-        response = in.readLine();
+        writer.print("EHLO localhost\r\n");
+        writer.flush();
+        response = reader.readLine();
         System.out.println(response);
 
         while(response.startsWith("250-")) {
-            response = in.readLine();
+            response = reader.readLine();
             System.out.println(response);
         }
 
-        out.println("MAIL FROM: " + mail.getFrom());
-        response = in.readLine();
+        writer.print("MAIL FROM: " + mail.getFrom() + "\r\n");
+        writer.flush();
+        response = reader.readLine();
         System.out.println(response);
 
         for(String s : mail.getTo()) {
-            out.println("RCPT TO: " + s);
-            response = in.readLine();
+            writer.print("RCPT TO: " + s + "\r\n");
+            writer.flush();
+            response = reader.readLine();
             System.out.println(response);
         }
 
         if(mail.getCc() != null) {
             for(String s : mail.getCc()) {
-                out.println("RCPT TO: " + s);
-                response = in.readLine();
+                writer.print("RCPT TO: " + s + "\r\n");
+                writer.flush();
+                response = reader.readLine();
                 System.out.println(response);
             }
         }
 
         if(mail.getBcc() != null) {
             for(String s : mail.getBcc()) {
-                out.println("RCPT TO: " + s);
-                response = in.readLine();
+                writer.print("RCPT TO: " + s + "\r\n");
+                writer.flush();
+                response = reader.readLine();
                 System.out.println(response);
             }
         }
 
-        out.println("DATA");
-        response = in.readLine();
+        writer.print("DATA \r\n");
+        writer.flush();
+        response = reader.readLine();
         System.out.println(response);
 
-        out.println("Content-Type: text/plain; charset=\"utf-8\"");
+        writer.print("Content-Type: text/plain; charset=\"utf-8\" \r\n");
+        writer.flush();
 
-        out.println("From: " + mail.getFrom());
+        writer.print("From: " + mail.getFrom() + "\r\n");
+        writer.flush();
 
-        out.print("To: ");
+        writer.print("To: ");
         for(int i = 0; i < mail.getTo().length; i++) {
             if(i > 0) {
-                out.print(", " + mail.getTo()[i]);
+                writer.print(", " + mail.getTo()[i]);
             }
             else {
-                out.print(mail.getTo()[i]);
+                writer.print(mail.getTo()[i]);
             }
         }
-        out.println();
+        writer.print("\r\n");
+        writer.flush();
 
-        out.println("Subject: " + mail.getSubject());
+        writer.print("Subject: " + mail.getSubject() + "\r\n");
+        writer.flush();
 
         if(mail.getCc() != null) {
-            out.print("Cc:");
+            writer.print("Cc:");
             for(int i = 0; i < mail.getCc().length; i++) {
                 if(i > 0) {
-                    out.print(", " + mail.getCc()[i]);
+                    writer.print(", " + mail.getCc()[i]);
                 }
                 else {
-                    out.print(mail.getCc()[i]);
+                    writer.print(mail.getCc()[i]);
                 }
             }
-            out.println();
+            writer.print("\r\n");
+            writer.flush();
         }
-
-        out.println();
-        out.println(mail.getMessage());
+        writer.print("\r\n");
+        writer.flush();
+        writer.print(mail.getMessage() + "\r\n");
+        writer.flush();
 
         // Fin
-        out.println(".");
-        out.flush();
-        response = in.readLine();
+        writer.print(".");
+        writer.print("\r\n");
+        writer.flush();
+        response = reader.readLine();
         System.out.println(response);
-        out.println("QUIT");
-        out.flush();
-        out.close();
-        in.close();
+        writer.print("QUIT \r\n");
+        writer.flush();
+        writer.close();
+        reader.close();
         socket.close();
     }
 }
