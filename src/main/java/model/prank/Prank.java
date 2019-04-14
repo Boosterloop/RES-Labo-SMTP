@@ -2,14 +2,15 @@ package model.prank;
 
 import java.util.LinkedList;
 
+import model.mail.Mail;
 import model.mail.Person;
+import util.Utils;
 
 public class Prank {
 	
 	private Person victimSender;
-	private LinkedList<Person> victimsRecever;
-	private String subject;
-	private String Message;
+	private LinkedList<Person> victimsRecever = new LinkedList<Person>();
+	private String message;
 	
 	/**
 	 * @return the victimSender
@@ -26,33 +27,53 @@ public class Prank {
 	}
 
 	public LinkedList<Person> getVictimsRecever() {
-		return victimsRecever;
+		return new LinkedList<Person>(victimsRecever);
 	}
 
 	public void addVictimRecever(Person victim) {
 		this.victimsRecever.add(victim);
 	}
 
+	public void addVictimsRecever(LinkedList<Person> victims) {
+		this.victimsRecever.addAll(victims);
+	}
+
+
 	/**
 	 * @return the message
 	 */
 	public String getMessage() {
-		return Message;
+		return message;
 	}
 
 	/**
 	 * @param message the message to set
 	 */
 	public void setMessage(String message) {
-		Message = message;
+		this.message = message;
 	}
 
-	public String getSubject() {
-		return subject;
-	}
+	public Mail createMail() {
+		Mail mail = new Mail();
 
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
+		mail.setFrom(victimSender.getEmail());
 
+		String[] to = new String[victimsRecever.size()];
+		int i = 0;
+		for(Person victim : victimsRecever) {
+			to[i] = victim.getEmail();
+			i++;
+		}
+		mail.setTo(to);
+
+		String[] messageSubjectAndBody = Utils.getNextLine(message);
+
+		if(!messageSubjectAndBody[0].equals("") && messageSubjectAndBody[0].startsWith("Subject:")) {
+			int index = messageSubjectAndBody[0].indexOf(' ');
+			mail.setSubject(messageSubjectAndBody[0].substring(index));
+			mail.setMessage(messageSubjectAndBody[1]);
+		}
+
+		return mail;
+	}
 }

@@ -17,7 +17,7 @@ public class ReadConfig {
 	private LinkedList<String> messages = new LinkedList<String>();
 	private int nbGroup;
 
-	public ReadConfig(String file) throws IOException {
+	public ReadConfig() throws IOException {
 		try {
             BufferedReader reader;
 			reader = new BufferedReader(new FileReader("./config/victim"));
@@ -27,13 +27,7 @@ public class ReadConfig {
 				if(victim == null) {
 				    break;
                 }
-				/*String[] person = victim.split(" ");
-
-				if(person.length == 3) {
-					victims.add(new Person(person[1], person[0], person[2]));
-				} */
 				victims.add(new Person(null, null, victim));
-
 			}
 			reader.close();
 		}
