@@ -20,6 +20,7 @@ public class ReadConfig {
 	private String mailtrapPassword = null;
 
 	public ReadConfig() throws IOException {
+		// lecture du fichier Victim
 		try {
             BufferedReader reader;
 			reader = new BufferedReader(new FileReader("./config/victim"));
@@ -37,7 +38,7 @@ public class ReadConfig {
 			System.out.println("Fichier introuvable");
 		}
 
-		// config.properties
+		// lecture du fichier config.properties
 		Properties properties = new Properties();
 		properties.load(new FileInputStream("./config/config.properties"));
 
@@ -49,6 +50,7 @@ public class ReadConfig {
 		mailtrapPassword = properties.getProperty("mailtrapPassword");
 		System.out.println(mailtrapPassword);
 
+		// lecture du fichier message
         try {
             BufferedReader reader = null;
             reader = new BufferedReader(new FileReader("./config/message"));
