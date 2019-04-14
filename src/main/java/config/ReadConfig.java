@@ -60,9 +60,7 @@ public class ReadConfig {
 		serverIP = properties.getProperty("smtpServerAddress");
 		serverPort = Integer.parseInt(properties.getProperty("smptServerPort"));
 		mailtrapUsername = properties.getProperty("mailtrapUsername");
-		System.out.println(mailtrapUsername);
 		mailtrapPassword = properties.getProperty("mailtrapPassword");
-		System.out.println(mailtrapPassword);
 
 		// Gestion des messages
         try {
